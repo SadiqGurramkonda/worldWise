@@ -4,7 +4,13 @@ import { Link } from "react-router-dom";
 
 function CityItem({ city }) {
   const { cityName, date, emoji, id, position } = city;
-  const { currentCity } = useCities();
+  const { currentCity, removeCity } = useCities();
+  console.log(id, currentCity);
+
+  function handleRemoveCity(e) {
+    e.preventDefault();
+    removeCity(id);
+  }
   return (
     <li>
       <Link
@@ -15,7 +21,9 @@ function CityItem({ city }) {
       >
         <span className={styles.emoji}>{emoji}</span>
         <h3 className={styles.name}>{cityName}</h3>
-        <button className={styles.deleteBtn}>&times;</button>
+        <button className={styles.deleteBtn} onClick={handleRemoveCity}>
+          &times;
+        </button>
       </Link>
     </li>
   );
