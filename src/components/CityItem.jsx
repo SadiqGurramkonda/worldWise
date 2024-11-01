@@ -3,9 +3,10 @@ import styles from "./CityItem.module.css";
 import { Link } from "react-router-dom";
 
 function CityItem({ city }) {
-  const { cityName, date, emoji, id, position } = city;
+  const { cityName, emoji, _id:id, position } = city;
   const { currentCity, removeCity } = useCities();
-  console.log(id, currentCity);
+
+  
 
   function handleRemoveCity(e) {
     e.preventDefault();
@@ -15,7 +16,7 @@ function CityItem({ city }) {
     <li>
       <Link
         className={`${styles.cityItem} ${
-          id === currentCity.id ? styles["cityItem--active"] : ""
+          id === currentCity._id ? styles["cityItem--active"] : ""
         }`}
         to={`${id}?lat=${position.lat}&lng=${position.lng}`}
       >

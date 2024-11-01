@@ -17,7 +17,7 @@ export default function Homepage() {
           of. Never forget your wonderful experiences, and show your friends how
           you have wandered the world.
         </h2>
-        <Link to="/login" className="cta">
+        <Link to="/signup" className="cta">
           Start tracking now
         </Link>
       </section>

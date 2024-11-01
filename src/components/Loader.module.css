@@ -1,0 +1,62 @@
+
+.ldr,
+.ldr div {
+  box-sizing: border-box;
+}
+.ldr {
+  display: inline-block;
+  position: relative;
+  width: 10px;
+  height: 10px;
+}
+.ldr div {
+  position: absolute;
+  top: 3px;
+  right: 89px;
+  width: 4.33333px;
+  height: 4.33333px;
+  border-radius: 50%;
+  background: var(--color-dark--1);
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.ldr div:nth-child(1) {
+  left: 4px;
+  animation: ldr1 0.6s infinite;
+}
+.ldr div:nth-child(2) {
+  left: 4px;
+  animation: ldr2 0.6s infinite;
+}
+.ldr div:nth-child(3) {
+  left: 16px;
+  animation: ldr2 0.6s infinite;
+}
+.ldr div:nth-child(4) {
+  left: 28px;
+  animation: ldr3 0.6s infinite;
+}
+@keyframes ldr1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes ldr3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes ldr2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(12px, 0);
+  }
+}
+

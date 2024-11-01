@@ -1,12 +1,13 @@
+
 import {
   createContext,
   useContext,
   useEffect,
   useReducer,
-  useState,
 } from "react";
+import { useAuth } from "./FakeAuthContext";
 
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = 'https://worldwise-api-vue7.onrender.com/worldwise/api/v1';
 // 1) create a context
 const citiesContext = createContext();
 
@@ -38,30 +39,45 @@ function reducer(state, action) {
       return {
         ...state,
         isLoading: false,
-        cities: state.cities.filter((city) => city.id !== action.payload),
+        cities: state.cities.filter((city) => city._id !== action.payload),
       };
     default:
       throw new Error("unknown action type");
   }
 }
 
+
 function CitiesProvider({ children }) {
-  const [{ cities, isLoading, currentCity }, dispatch] = useReducer(
+  const [{ cities, isLoading, currentCity, error }, dispatch] = useReducer(
     reducer,
     intialState
   );
 
-  // const [cities, setCities] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [currentCity, setCurrentCity] = useState({});
+  const {isAuthenticated} = useAuth();
+  console.log(cities);
 
-  useEffect(() => {
+  useEffect(function(){
+    async function getCities(){
+      await fetchCities();
+    };
+    if(isAuthenticated){
+      getCities();
+    }
+    
+  },[isAuthenticated]);
+
+  
     async function fetchCities() {
       dispatch({ type: "loading" });
       try {
-        const res = await fetch(`${BASE_URL}/cities`);
-        const cities = await res.json();
-        dispatch({ type: "cities/loaded", payload: cities });
+        const res = await fetch(`${BASE_URL}/cities`,{
+          headers: {
+            "Authorization":  `Bearer ${localStorage.getItem("token")}`
+          }
+        });
+        const data = await res.json();
+        dispatch({ type: "cities/loaded", payload: data.data.cities });
+        console.log(data);
       } catch (e) {
         dispatch({
           type: "rejected",
@@ -70,15 +86,11 @@ function CitiesProvider({ children }) {
       }
     }
 
-    fetchCities();
-  }, []);
-
   async function getCity(id) {
     dispatch({ type: "loading" });
     try {
-      const res = await fetch(`${BASE_URL}/cities/${id}`);
-      const data = await res.json();
-      dispatch({ type: "city/loaded", payload: data });
+      const city = cities.find(city => city._id === id);
+      dispatch({ type: "city/loaded", payload: city });
     } catch (e) {
       dispatch({
         type: "rejected",
@@ -88,6 +100,7 @@ function CitiesProvider({ children }) {
   }
 
   async function createCity(newCity) {
+    console.log("create city called,",newCity);
     try {
       dispatch({ type: "loading" });
       const res = await fetch(`${BASE_URL}/cities`, {
@@ -95,10 +108,11 @@ function CitiesProvider({ children }) {
         body: JSON.stringify(newCity),
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
         },
       });
       const data = await res.json();
-      dispatch({ type: "city/created", payload: data });
+      dispatch({ type: "city/created", payload: data.createdCity });
     } catch (e) {
       dispatch({
         type: "rejected",
@@ -112,6 +126,9 @@ function CitiesProvider({ children }) {
     try {
       await fetch(`${BASE_URL}/cities/${id}`, {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
       });
       dispatch({ type: "city/deleted", payload: id });
     } catch (e) {
@@ -127,6 +144,7 @@ function CitiesProvider({ children }) {
         cities,
         isLoading,
         currentCity,
+        error,
         getCity,
         createCity,
         removeCity,

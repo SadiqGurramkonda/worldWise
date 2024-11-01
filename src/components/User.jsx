@@ -13,7 +13,6 @@ const FAKE_USER = {
 function User() {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-  console.log(user.avatar);
 
   function handleLogout() {
     logout();
@@ -22,8 +21,8 @@ function User() {
 
   return (
     <div className={styles.user}>
-      <img src={user.avatar} alt={user.name} />
-      <span>Welcome, {user.name}</span>
+      <img src={FAKE_USER.avatar} alt={user} />
+      <span>Welcome, {user}</span>
       <Button onClick={handleLogout}>Logout</Button>
     </div>
   );

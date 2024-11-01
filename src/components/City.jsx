@@ -30,11 +30,13 @@ function City() {
 
   const { getCity, currentCity, isloading } = useCities();
 
+
   useEffect(() => {
     getCity(id);
   }, [id]);
 
-  const { cityName, emoji, date, notes } = currentCity;
+  const { cityName, flag:emoji, notes, visitedOn:date } = currentCity;
+  console.log(currentCity, date);
 
   if (isloading) {
     return <Spinner />;

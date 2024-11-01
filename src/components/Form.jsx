@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 import styles from "./Form.module.css";
 import Button from "./Button";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useUrlPosition } from "../hooks/useURLPosition";
 import Message from "./Message";
 import Spinner from "./Spinner";
@@ -22,8 +22,8 @@ export function convertToEmoji(countryCode) {
   return String.fromCodePoint(...codePoints);
 }
 
-const BASE_URL =
-  "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0";
+// const BASE_URL =
+//   "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0";
 
 function Form() {
   const [lat, lng] = useUrlPosition();
@@ -37,7 +37,7 @@ function Form() {
   const [emoji, setEmoji] = useState("");
   const [geolocationError, setGeoLocationError] = useState("");
 
-  // console.log(date);
+  console.log(date);
 
   useEffect(() => {
     if (!lat && !lng) return;
@@ -54,7 +54,6 @@ function Form() {
             "That doesn't seem to be like a city, click somewhere else 😉"
           );
         }
-        console.log(data);
         setCityName(data.city || data.locality || "");
         setCountry(data.countryName);
         setEmoji(convertToEmoji(data.countryCode));
@@ -71,14 +70,16 @@ function Form() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (!cityName || !date) return;
+    if (!cityName || !date || !notes) return;
     const newCity = {
       cityName,
       country,
-      emoji,
+      flag:emoji,
       notes,
       position: { lat, lng },
+      visitedOn: date
     };
+    console.log(newCity);
     await createCity(newCity);
     navigate("/app/cities");
   }
@@ -128,6 +129,7 @@ function Form() {
           id="notes"
           onChange={(e) => setNotes(e.target.value)}
           value={notes}
+          required
         />
       </div>
 

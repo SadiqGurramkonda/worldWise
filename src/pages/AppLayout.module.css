@@ -1,7 +1,14 @@
 .app {
   height: 100vh;
-  padding: 2.4rem;
+  padding: 0.6rem;
+  background-color: var(--color-dark--2);
   overscroll-behavior-y: none;
   display: flex;
   position: relative;
+}
+
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column-reverse;
+  }
 }

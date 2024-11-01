@@ -1,7 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Product from "./pages/Product";
-import Pricing from "./pages/Pricing";
 import Homepage from "./pages/Homepage";
 import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./pages/AppLayout";
@@ -13,17 +11,17 @@ import Form from "./components/Form";
 import { CitiesProvider } from "./contexts/CitiesContext";
 import { AuthProvider } from "./contexts/FakeAuthContext";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import SignUp from "./pages/Signup";
 
 function App() {
   return (
     //consuming the context by wrapping with context provider
-    <AuthProvider>
-      <CitiesProvider>
-        <BrowserRouter>
+    <BrowserRouter>
+      <AuthProvider>
+        <CitiesProvider>
           <Routes>
             <Route path="/" element={<Homepage />} />
-            <Route path="product" element={<Product />} />
-            <Route path="pricing" element={<Pricing />} />
+            <Route path="signup" element={<SignUp />} />
             <Route path="login" element={<Login />} />
             {/* Nested routing below */}
             <Route
@@ -43,9 +41,9 @@ function App() {
 
             <Route path="*" element={<PageNotFound />} />
           </Routes>
-        </BrowserRouter>
-      </CitiesProvider>
-    </AuthProvider>
+        </CitiesProvider>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 

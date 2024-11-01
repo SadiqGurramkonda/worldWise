@@ -54,6 +54,39 @@
         "lat": "11.933874251823696",
         "lng": "79.83319358977096"
       }
+    },
+    {
+      "id": "d5d7",
+      "cityName": "Idles",
+      "country": "Algeria",
+      "emoji": "🇩🇿",
+      "notes": "hello there",
+      "position": {
+        "lat": "25.267614077392704",
+        "lng": "6.049356545500224"
+      }
+    },
+    {
+      "id": "8fef",
+      "cityName": "Tenali",
+      "country": "India",
+      "emoji": "🇮🇳",
+      "notes": "test",
+      "position": {
+        "lat": "16.232063472292456",
+        "lng": "80.6626379571539"
+      }
+    },
+    {
+      "id": "f795",
+      "cityName": "Rayachoti",
+      "country": "India",
+      "emoji": "🇮🇳",
+      "notes": "",
+      "position": {
+        "lat": "14.042561809951815",
+        "lng": "78.73809848328327"
+      }
     }
   ]
 }

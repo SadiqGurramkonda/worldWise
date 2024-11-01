@@ -1,38 +1,38 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./Login.module.css";
 import PageNav from "../components/PageNav";
 import { useAuth } from "../contexts/FakeAuthContext";
-import { useNavigate } from "react-router-dom";
+
 import Button from "../components/Button";
+import { Link } from "react-router-dom";
+import ErrorComponent from "../components/ErrorComponent";
 
 export default function Login() {
   // PRE-FILL FOR DEV PURPOSES
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("jack@example.com");
-  const [password, setPassword] = useState("qwerty");
 
-  const { login, isAuthenticated } = useAuth();
+  const [email, setEmail] = useState("sdq35@gmail.com");
+  const [password, setPassword] = useState("12345678");
+  
 
-  function handleLogin(e) {
+  const { login, error, isLoading, user} = useAuth();
+  console.log(user);
+
+  async function handleLogin(e) {    
     e.preventDefault();
-    if ((email, password)) {
+    if ((email && password)) {
       login(email, password);
     }
   }
-
-  useEffect(
-    function () {
-      if (isAuthenticated) {
-        navigate("/app", { replace: true });
-      }
-    },
-    [isAuthenticated, navigate]
-  );
 
   return (
     <main className={styles.login}>
       <PageNav />
       <form className={styles.form} onSubmit={handleLogin}>
+        {error && (
+          <div className={styles.row}>
+            <ErrorComponent>{error}</ErrorComponent>
+          </div>
+        )}
         <div className={styles.row}>
           <label htmlFor="email">Email address</label>
           <input
@@ -53,9 +53,19 @@ export default function Login() {
           />
         </div>
 
-        <div>
-          <Button type="primary">Login</Button>
+        <div className={styles.row}>
+          <Button type="primary" isLoading={isLoading}>
+            Login
+          </Button>
         </div>
+        <p>
+          Don't have an account?{" "}
+          <span>
+            <Link to="/signup" className={styles.link}>
+              Sign up
+            </Link>
+          </span>
+        </p>
       </form>
     </main>
   );
