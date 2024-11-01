@@ -9,7 +9,7 @@ function PageNav() {
     <nav className={styles.nav}>
       <Logo />
       <ul>
-        <li>
+        <li className={styles.home}>
           <NavLink to="/">Home</NavLink>
         </li>
         {!(
