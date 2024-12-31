@@ -29,7 +29,7 @@ function Map() {
   const mapRef = useRef(null);
   const markerRefs = useRef({});
 
-  console.log(mapPosition);
+  // console.log(mapPosition);
 
   
 

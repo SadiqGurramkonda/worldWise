@@ -14,7 +14,7 @@ export default function SignUp() {
     const [password, setPassword] = useState("");
 
     const { signup, isLoading, error } = useAuth();
-    console.log(isLoading);
+    // console.log(isLoading);
 
     async function handleSignup(e) {
         e.preventDefault();

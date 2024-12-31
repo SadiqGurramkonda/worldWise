@@ -40,7 +40,7 @@ function AuthProvider({ children }) {
     reducer,
     intialState
   );
-  console.log(isAuthenticated);
+  // console.log(isAuthenticated);
 
   const navigate = useNavigate();
 
@@ -70,7 +70,7 @@ function AuthProvider({ children }) {
         const data = await res.json();
         if(!res.ok){
           dispatch({type: "rejected", payload: data.message});
-          console.log(data.message);
+          // console.log(data.message);
         }
         else{
           dispatch({type: "login",payload: data?.userName});

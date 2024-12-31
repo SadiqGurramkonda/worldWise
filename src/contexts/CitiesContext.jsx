@@ -54,7 +54,7 @@ function CitiesProvider({ children }) {
   );
 
   const {isAuthenticated} = useAuth();
-  console.log(cities);
+  // console.log(cities);
 
   useEffect(function(){
     async function getCities(){
@@ -77,7 +77,7 @@ function CitiesProvider({ children }) {
         });
         const data = await res.json();
         dispatch({ type: "cities/loaded", payload: data.data.cities });
-        console.log(data);
+        // console.log(data);
       } catch (e) {
         dispatch({
           type: "rejected",
@@ -100,7 +100,7 @@ function CitiesProvider({ children }) {
   }
 
   async function createCity(newCity) {
-    console.log("create city called,",newCity);
+    // console.log("create city called,",newCity);
     try {
       dispatch({ type: "loading" });
       const res = await fetch(`${BASE_URL}/cities`, {

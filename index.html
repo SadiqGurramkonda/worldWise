@@ -1,15 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/icon.png" />
-    <meta name="description"
-      content="WordlWise is a world map that tracks your footsteps into every city you can think of. Never forget your wonderful experiences, and show your friends how you have wandered the world.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WordlWise | start tracking your adventures</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <!-- Basic Meta Tags -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="WorldWise is a world map app that helps you track your travels and adventures. Never forget your experiences and share your journey with friends." />
+  <meta name="keywords" content="world map, travel tracker, adventure log, city explorer, world travel" />
+  <meta name="author" content="Your Name" />
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="WorldWise | Start Tracking Your Adventures" />
+  <meta property="og:description"
+    content="Discover a personalized world map to log your travels and track your memories across cities and countries. Inspire others with your adventures!" />
+  <meta property="og:image" content="https://world-wise-three-topaz.vercel.app/preview-image.jpg" />
+  <meta property="og:url" content="https://world-wise-three-topaz.vercel.app/" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="WorldWise | Start Tracking Your Adventures" />
+  <meta name="twitter:description"
+    content="Discover and track your adventures with a world map. Share your journey and inspire others!" />
+  <meta name="twitter:image" content="https://world-wise-three-topaz.vercel.app/preview-image.jpg" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/icon.png" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://world-wise-three-topaz.vercel.app/" />
+
+  <!-- Title -->
+  <title>WorldWise | Start Tracking Your Adventures</title>
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "WorldWise",
+        "url": "https://world-wise-three-topaz.vercel.app/",
+        "description": "Track your travels and adventures with WorldWise's personalized world map.",
+        "author": {
+          "@type": "Person",
+          "name": "Your Name"
+        },
+        "image": "https://world-wise-three-topaz.vercel.app/bg.jpg",
+        "applicationCategory": "Travel"
+      }
+    </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>

@@ -15,7 +15,7 @@ export default function Login() {
   
 
   const { login, error, isLoading, user} = useAuth();
-  console.log(user);
+  // console.log(user);
 
   async function handleLogin(e) {    
     e.preventDefault();

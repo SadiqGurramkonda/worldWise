@@ -37,7 +37,7 @@ function Form() {
   const [emoji, setEmoji] = useState("");
   const [geolocationError, setGeoLocationError] = useState("");
 
-  console.log(date);
+  // console.log(date);
 
   useEffect(() => {
     if (!lat && !lng) return;
@@ -59,7 +59,7 @@ function Form() {
         setEmoji(convertToEmoji(data.countryCode));
       } catch (e) {
         setGeoLocationError(e.message);
-        console.log(e);
+        // console.log(e);
       } finally {
         setIsLoadingGeoCoding(false);
       }
