@@ -8,7 +8,7 @@ import {
 import { useAuth } from "./FakeAuthContext";
 
 const BASE_URL = 'https://worldwise-api-vue7.onrender.com/worldwise/api/v1';
-const BASE_URL_DEVELOP = 'http://localhost:8080/worldwise/api/v1'
+// const BASE_URL_DEVELOP = 'http://localhost:8080/worldwise/api/v1';
 // 1) create a context
 const citiesContext = createContext();
 
@@ -71,7 +71,7 @@ function CitiesProvider({ children }) {
     async function fetchCities() {
       dispatch({ type: "loading" });
       try {
-        const res = await fetch(`${BASE_URL_DEVELOP}/cities`,{
+        const res = await fetch(`${BASE_URL}/cities`,{
           credentials: 'include'
           // headers: {
           //   "Authorization":  `Bearer ${localStorage.getItem("token")}`
@@ -105,7 +105,7 @@ function CitiesProvider({ children }) {
     // console.log("create city called,",newCity);
     try {
       dispatch({ type: "loading" });
-      const res = await fetch(`${BASE_URL_DEVELOP}/cities`, {
+      const res = await fetch(`${BASE_URL}/cities`, {
         method: "POST",
         credentials: 'include',
         body: JSON.stringify(newCity),
@@ -127,7 +127,7 @@ function CitiesProvider({ children }) {
   async function removeCity(id) {
     dispatch({ type: "loading" });
     try {
-      await fetch(`${BASE_URL_DEVELOP}/cities/${id}`, {
+      await fetch(`${BASE_URL}/cities/${id}`, {
         method: "DELETE",
         credentials: 'include',
         headers: {

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const BASE_URL =
   'https://worldwise-api-vue7.onrender.com/worldwise/api/v1/user';
 
-const BASE_URL_DEVELOP = 'http://localhost:8080/worldwise/api/v1/user';
+// const BASE_URL_DEVELOP = 'http://localhost:8080/worldwise/api/v1/user';
 
 const AuthContext = createContext();
 
@@ -71,7 +71,7 @@ function AuthProvider({ children }) {
   useEffect(() => {
     async function verifySession() {
       try {
-        const res = await fetch(`${BASE_URL_DEVELOP}/getuser`, {
+        const res = await fetch(`${BASE_URL}/getuser`, {
           method: 'GET',
           credentials: 'include',
           headers: {
@@ -101,7 +101,7 @@ function AuthProvider({ children }) {
     try {
       dispatch({ type: 'loading' });
       dispatch({ type: 'error/reset' });
-      const res = await fetch(`${BASE_URL_DEVELOP}/login`, {
+      const res = await fetch(`${BASE_URL}/login`, {
         method: 'POST',
         body: payLoad,
         credentials: 'include',
@@ -129,7 +129,7 @@ function AuthProvider({ children }) {
     try {
       dispatch({ type: 'loading' });
       dispatch({ type: 'error/reset' });
-      const res = await fetch(`${BASE_URL_DEVELOP}/signup`, {
+      const res = await fetch(`${BASE_URL}/signup`, {
         method: 'POST',
         body: payLoad,
         credentials: 'include',
@@ -154,7 +154,7 @@ function AuthProvider({ children }) {
   async function logout() {
     try {
       dispatch({ type: 'loading' });
-      await fetch(`${BASE_URL_DEVELOP}/logout`, {
+      await fetch(`${BASE_URL}/logout`, {
         method: 'POST',
         credentials: 'include',
         headers: {
