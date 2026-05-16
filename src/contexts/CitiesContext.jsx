@@ -8,6 +8,7 @@ import {
 import { useAuth } from "./FakeAuthContext";
 
 const BASE_URL = 'https://worldwise-api-vue7.onrender.com/worldwise/api/v1';
+const BASE_URL_DEVELOP = 'http://localhost:8080/worldwise/api/v1'
 // 1) create a context
 const citiesContext = createContext();
 
@@ -70,10 +71,11 @@ function CitiesProvider({ children }) {
     async function fetchCities() {
       dispatch({ type: "loading" });
       try {
-        const res = await fetch(`${BASE_URL}/cities`,{
-          headers: {
-            "Authorization":  `Bearer ${localStorage.getItem("token")}`
-          }
+        const res = await fetch(`${BASE_URL_DEVELOP}/cities`,{
+          credentials: 'include'
+          // headers: {
+          //   "Authorization":  `Bearer ${localStorage.getItem("token")}`
+          // }
         });
         const data = await res.json();
         dispatch({ type: "cities/loaded", payload: data.data.cities });
@@ -103,12 +105,13 @@ function CitiesProvider({ children }) {
     // console.log("create city called,",newCity);
     try {
       dispatch({ type: "loading" });
-      const res = await fetch(`${BASE_URL}/cities`, {
+      const res = await fetch(`${BASE_URL_DEVELOP}/cities`, {
         method: "POST",
+        credentials: 'include',
         body: JSON.stringify(newCity),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem("token")}`
+          // "Authorization": `Bearer ${localStorage.getItem("token")}`
         },
       });
       const data = await res.json();
@@ -124,10 +127,11 @@ function CitiesProvider({ children }) {
   async function removeCity(id) {
     dispatch({ type: "loading" });
     try {
-      await fetch(`${BASE_URL}/cities/${id}`, {
+      await fetch(`${BASE_URL_DEVELOP}/cities/${id}`, {
         method: "DELETE",
+        credentials: 'include',
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
+          // Authorization: `Bearer ${localStorage.getItem("token")}`
         }
       });
       dispatch({ type: "city/deleted", payload: id });

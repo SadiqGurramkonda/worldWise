@@ -1,8 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Homepage.module.css";
 import PageNav from "../components/PageNav";
+import { useAuth } from "../contexts/FakeAuthContext";
+import { useEffect } from "react";
 
 export default function Homepage() {
+  const {isAuthenticated} = useAuth();
+  const navigation = useNavigate();
+
+  useEffect(()=>{
+    if(isAuthenticated){
+    navigation("/app");
+  }
+  },[navigation,isAuthenticated]);
+  
   return (
     <main className={styles.homepage}>
       <PageNav />
