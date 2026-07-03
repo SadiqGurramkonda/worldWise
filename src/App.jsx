@@ -36,9 +36,7 @@ function App() {
             <Route
               path="/signup"
               element={
-                <GuestRoute>
                   <SignUp />
-                </GuestRoute>
               }
             />
             {/* Nested routing below */}

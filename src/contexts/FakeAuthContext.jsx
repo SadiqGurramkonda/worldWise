@@ -52,7 +52,7 @@ function reducer(state, action) {
     case 'loading':
       return { ...state, isLoading: true };
     case 'error/reset':
-      return { ...state, error: '' };
+      return { ...state, error: '', isLoading: false };
     default:
       throw new Error('unknown action type...');
   }
@@ -63,7 +63,6 @@ function AuthProvider({ children }) {
     reducer,
     intialState
   );
-  // console.log(isAuthenticated);
 
   const navigate = useNavigate();
 
@@ -71,6 +70,8 @@ function AuthProvider({ children }) {
   useEffect(() => {
     async function verifySession() {
       try {
+        dispatch({ type: 'loading' });
+        dispatch({ type: 'error/reset' });
         const res = await fetch(`${BASE_URL}/getuser`, {
           method: 'GET',
           credentials: 'include',
@@ -88,6 +89,15 @@ function AuthProvider({ children }) {
       } catch (e) {
         console.log('error verifySession', e);
       }
+    }
+
+    const publicPaths = ['/login', '/signup'];
+    const currentPath = window.location.pathname;
+
+    if (publicPaths.includes(currentPath)) {
+      dispatch({ type: 'error/reset' });
+      dispatch({ type: 'session/failed' }); 
+      return;
     }
     verifySession();
   }, []);
@@ -115,7 +125,6 @@ function AuthProvider({ children }) {
         // console.log(data.message);
       } else {
         dispatch({ type: 'login', payload: data?.userName });
-        // localStorage.setItem("token",data.token);
         navigate('/app');
       }
     } catch (e) {
@@ -143,8 +152,7 @@ function AuthProvider({ children }) {
         console.log(data.message);
       } else {
         dispatch({ type: 'signup', payload: username });
-        localStorage.setItem('token', data.data.token);
-        // navigate("/app");
+        navigate("/app");
       }
     } catch (e) {
       dispatch({ type: 'rejected', payload: e.message });
